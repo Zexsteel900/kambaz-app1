@@ -11,7 +11,8 @@ import { useParams } from "next/navigation";
 import * as db from "../../../Database";
 
 export default function Assignments() {
-  const { cid } = useParams();
+  const params = useParams();
+  const cid = Array.isArray(params.cid) ? params.cid[0] : params.cid; // ✅ normalize to string
 
   // Map URL course IDs to actual course IDs in your JSON
   const courseIdMap: Record<string, string> = {
@@ -20,8 +21,10 @@ export default function Assignments() {
     "91011": "RS103"
   };
 
+  const mappedCourseId = courseIdMap[cid ?? ""]; // ✅ handles undefined safely
+
   const courseAssignments = db.assignments.filter(
-    a => a.course === courseIdMap[cid]
+    (a) => a.course === mappedCourseId
   );
 
   if (!courseAssignments.length) {
@@ -46,6 +49,7 @@ export default function Assignments() {
           </Button>
         </div>
       </div>
+
       <div className="d-flex justify-content-between align-items-center mb-4 border border-light p-3 rounded">
         <h3 className="mb-0">ASSIGNMENTS</h3>
         <div className="d-flex align-items-center">
@@ -54,21 +58,27 @@ export default function Assignments() {
           <IoEllipsisVertical className="fs-4 text-muted" />
         </div>
       </div>
+
       <ListGroup className="rounded-0">
         {courseAssignments.map((assignment) => (
           <ListGroupItem key={assignment._id} className="wd-assignment p-3 ps-1 border-start border-4">
             <div className="d-flex justify-content-between align-items-center">
               <div className="position-relative me-2 text-success">
                 <LiaBookSolid className="fs-3" />
-                <BsPen className="position-absolute fs-6" style={{top: '2px', right: '2px'}} />
+                <BsPen className="position-absolute fs-6" style={{ top: "2px", right: "2px" }} />
               </div>
-              <Link href={`/Courses/${cid}/Assignments/${assignment._id}`} className="text-decoration-none flex-grow-1 ms-2">
+
+              <Link
+                href={`/Courses/${cid}/Assignments/${assignment._id}`}
+                className="text-decoration-none flex-grow-1 ms-2"
+              >
                 <h5 className="mb-1">{assignment.title}</h5>
               </Link>
+
               <AssignmentControlButtons />
             </div>
+
             <p className="text-muted small mb-0 ms-5">
-              {/* You can add real details here if needed */}
               Multiple Modules | Not available until: TBD | Due: TBD | 100 pts
             </p>
           </ListGroupItem>
