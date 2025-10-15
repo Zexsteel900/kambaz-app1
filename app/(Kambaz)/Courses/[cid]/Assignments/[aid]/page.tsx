@@ -1,9 +1,18 @@
 "use client";
 import { Form, Button, Badge } from "react-bootstrap";
 import { useState } from "react";
+import { useParams } from "next/navigation";
+import Link from "next/link";
+import * as db from "../../../../Database";
 
 export default function EditAssignment() {
+  const { cid, aid } = useParams();
+  const assignment = db.assignments.find(a => a._id === aid);
   const [selected, setSelected] = useState(["Everyone"]);
+
+  if (!assignment) {
+    return <p>Assignment not found.</p>;
+  }
 
   return (
     <div id="wd-edit-assignment">
@@ -11,15 +20,15 @@ export default function EditAssignment() {
       <Form className="mb-4">
         <Form.Group className="mb-3 border p-3">
           <Form.Label htmlFor="wd-name">Assignment Name</Form.Label>
-          <Form.Control id="wd-name" type="text" placeholder="Enter assignment name" defaultValue="A1 - HTML" />
+          <Form.Control id="wd-name" type="text" placeholder="Enter assignment name" defaultValue={assignment.title} />
         </Form.Group>
         <Form.Group className="mb-3 border p-3">
           <Form.Label>Description</Form.Label>
-          <Form.Control as="textarea" rows={3} placeholder="Enter description" defaultValue="This assignment covers HTML basics." />
+          <Form.Control as="textarea" rows={3} placeholder="Enter description" defaultValue={assignment.description} />
         </Form.Group>
         <Form.Group className="mb-3 border p-3">
           <Form.Label htmlFor="wd-points">Points</Form.Label>
-          <Form.Control id="wd-points" type="number" placeholder="Enter points" defaultValue="100" />
+          <Form.Control id="wd-points" type="number" placeholder="Enter points" defaultValue={assignment.points} />
         </Form.Group>
         <Form.Group className="mb-3 border p-3">
           <Form.Label htmlFor="wd-group">Assignment Group</Form.Label>
@@ -77,19 +86,19 @@ export default function EditAssignment() {
         </Form.Group>
         <Form.Group className="mb-3 border p-3">
           <Form.Label htmlFor="wd-due-date">Due</Form.Label>
-          <Form.Control id="wd-due-date" type="datetime-local" defaultValue="2024-05-13T12:00" />
+          <Form.Control id="wd-due-date" type="datetime-local" defaultValue={assignment.dueDate} />
         </Form.Group>
         <Form.Group className="mb-3 border p-3">
           <Form.Label htmlFor="wd-available-from">Available from</Form.Label>
-          <Form.Control id="wd-available-from" type="datetime-local" defaultValue="2024-05-06T12:00" />
+          <Form.Control id="wd-available-from" type="datetime-local" defaultValue={assignment.availableDate} />
         </Form.Group>
         <Form.Group className="mb-3 border p-3">
           <Form.Label htmlFor="wd-available-until">Until</Form.Label>
-          <Form.Control id="wd-available-until" type="datetime-local" defaultValue="2024-05-20T12:00" />
+          <Form.Control id="wd-available-until" type="datetime-local" defaultValue={assignment.dueDate} />
         </Form.Group>
         <div className="d-flex justify-content-end">
-          <Button variant="secondary" className="me-2">Cancel</Button>
-          <Button variant="primary">Save</Button>
+          <Link href={`/Courses/${cid}/Assignments`} className="btn btn-secondary me-2">Cancel</Link>
+          <Link href={`/Courses/${cid}/Assignments`} className="btn btn-primary">Save</Link>
         </div>
       </Form>
     </div>

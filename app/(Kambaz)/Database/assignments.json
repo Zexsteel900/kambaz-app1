@@ -1,0 +1,11 @@
+[
+  { "_id": "A101", "title": "Propulsion Assignment", "course": "RS101", "description": "Analyze propulsion systems for rockets.", "points": 100, "dueDate": "2024-05-13T12:00", "availableDate": "2024-05-06T12:00" },
+  { "_id": "A102", "title": "Combustion Analysis", "course": "RS101", "description": "Perform combustion analysis on engine data.", "points": 150, "dueDate": "2024-05-20T12:00", "availableDate": "2024-05-13T12:00" },
+  { "_id": "A103", "title": "Nozzle Design Project", "course": "RS101", "description": "Design and simulate a rocket nozzle.", "points": 200, "dueDate": "2024-05-27T12:00", "availableDate": "2024-05-20T12:00" },
+  { "_id": "A201", "title": "Aerodynamics Quiz", "course": "RS102", "description": "Quiz on basic aerodynamics principles.", "points": 50, "dueDate": "2024-05-15T12:00", "availableDate": "2024-05-08T12:00" },
+  { "_id": "A202", "title": "Flow Analysis", "course": "RS102", "description": "Analyze fluid flow in aircraft systems.", "points": 120, "dueDate": "2024-05-22T12:00", "availableDate": "2024-05-15T12:00" },
+  { "_id": "A203", "title": "Heating Analysis", "course": "RS102", "description": "Study heat transfer in aerospace materials.", "points": 100, "dueDate": "2024-05-29T12:00", "availableDate": "2024-05-22T12:00" },
+  { "_id": "A301", "title": "Structural Design Task", "course": "RS103", "description": "Design structural components for spacecraft.", "points": 180, "dueDate": "2024-05-17T12:00", "availableDate": "2024-05-10T12:00" },
+  { "_id": "A302", "title": "Orbital Calculations", "course": "RS103", "description": "Calculate orbital trajectories.", "points": 140, "dueDate": "2024-05-24T12:00", "availableDate": "2024-05-17T12:00" },
+  { "_id": "A303", "title": "Systems Engineering Exam", "course": "RS103", "description": "Exam on systems engineering concepts.", "points": 160, "dueDate": "2024-05-31T12:00", "availableDate": "2024-05-24T12:00" }
+]

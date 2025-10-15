@@ -25,12 +25,3 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.wd-main-content-offset {
-  padding-left: 0;
-}
-
-@media (min-width: 768px) {
-  .wd-main-content-offset {
-    padding-left: 140px;
-  }
-}
