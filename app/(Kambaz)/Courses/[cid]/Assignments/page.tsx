@@ -8,7 +8,7 @@ import { LiaBookSolid } from "react-icons/lia";
 import { BsPen } from "react-icons/bs";
 import AssignmentControlButtons from "./AssignmentControlButtons";
 import { useParams } from "next/navigation";
-import * as db from "../../../Database";
+import { useSelector } from "react-redux";
 
 export default function Assignments() {
   const params = useParams();
@@ -23,8 +23,10 @@ export default function Assignments() {
 
   const mappedCourseId = courseIdMap[cid ?? ""]; // ✅ handles undefined safely
 
-  const courseAssignments = db.assignments.filter(
-    (a) => a.course === mappedCourseId
+  const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+
+  const courseAssignments = assignments.filter(
+    (a: any) => a.course === mappedCourseId
   );
 
   if (!courseAssignments.length) {
@@ -44,9 +46,9 @@ export default function Assignments() {
           <Button variant="secondary" className="me-2">
             <BsPlus /> Group
           </Button>
-          <Button variant="danger">
+          <Link href={`/Courses/${cid}/Assignments/new`} className="btn btn-danger">
             <BsPlus /> Assignment
-          </Button>
+          </Link>
         </div>
       </div>
 
@@ -75,7 +77,7 @@ export default function Assignments() {
                 <h5 className="mb-1">{assignment.title}</h5>
               </Link>
 
-              <AssignmentControlButtons />
+              <AssignmentControlButtons assignmentId={assignment._id} />
             </div>
 
             <p className="text-muted small mb-0 ms-5">

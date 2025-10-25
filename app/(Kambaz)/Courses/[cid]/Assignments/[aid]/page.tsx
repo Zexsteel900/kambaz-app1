@@ -1,18 +1,34 @@
 "use client";
 import { Form, Button, Badge } from "react-bootstrap";
-import { useState } from "react";
-import { useParams } from "next/navigation";
+import { useState, useEffect } from "react";
+import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import * as db from "../../../../Database";
+import { useSelector, useDispatch } from "react-redux";
+import { updateAssignment } from "../reducer";
 
 export default function EditAssignment() {
   const { cid, aid } = useParams();
-  const assignment = db.assignments.find(a => a._id === aid);
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+  const assignment = assignments.find((a: any) => a._id === aid);
   const [selected, setSelected] = useState(["Everyone"]);
+  const [formData, setFormData] = useState<any>({});
+
+  useEffect(() => {
+    if (assignment) {
+      setFormData(assignment);
+    }
+  }, [assignment]);
 
   if (!assignment) {
     return <p>Assignment not found.</p>;
   }
+
+  const handleSave = () => {
+    dispatch(updateAssignment(formData));
+    router.push(`/Courses/${cid}/Assignments`);
+  };
 
   return (
     <div id="wd-edit-assignment">
@@ -20,15 +36,33 @@ export default function EditAssignment() {
       <Form className="mb-4">
         <Form.Group className="mb-3 border p-3">
           <Form.Label htmlFor="wd-name">Assignment Name</Form.Label>
-          <Form.Control id="wd-name" type="text" placeholder="Enter assignment name" defaultValue={assignment.title} />
+          <Form.Control
+            id="wd-name"
+            type="text"
+            placeholder="Enter assignment name"
+            value={formData.title || ""}
+            onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+          />
         </Form.Group>
         <Form.Group className="mb-3 border p-3">
           <Form.Label>Description</Form.Label>
-          <Form.Control as="textarea" rows={3} placeholder="Enter description" defaultValue={assignment.description} />
+          <Form.Control
+            as="textarea"
+            rows={3}
+            placeholder="Enter description"
+            value={formData.description || ""}
+            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+          />
         </Form.Group>
         <Form.Group className="mb-3 border p-3">
           <Form.Label htmlFor="wd-points">Points</Form.Label>
-          <Form.Control id="wd-points" type="number" placeholder="Enter points" defaultValue={assignment.points} />
+          <Form.Control
+            id="wd-points"
+            type="number"
+            placeholder="Enter points"
+            value={formData.points || ""}
+            onChange={(e) => setFormData({ ...formData, points: parseInt(e.target.value) })}
+          />
         </Form.Group>
         <Form.Group className="mb-3 border p-3">
           <Form.Label htmlFor="wd-group">Assignment Group</Form.Label>
@@ -98,7 +132,7 @@ export default function EditAssignment() {
         </Form.Group>
         <div className="d-flex justify-content-end">
           <Link href={`/Courses/${cid}/Assignments`} className="btn btn-secondary me-2">Cancel</Link>
-          <Link href={`/Courses/${cid}/Assignments`} className="btn btn-primary">Save</Link>
+          <Button onClick={handleSave} className="btn btn-primary">Save</Button>
         </div>
       </Form>
     </div>
