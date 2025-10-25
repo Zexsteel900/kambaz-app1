@@ -8,9 +8,9 @@ import { enroll, unenroll } from "../Enrollments/reducer";
 
 
 export default function Dashboard() {
-  const { courses } = useSelector((state: { coursesReducer: { courses: any[] } }) => state.coursesReducer);
-  const { currentUser } = useSelector((state: { accountReducer: { currentUser: any } }) => state.accountReducer);
-  const { enrollments } = useSelector((state: { enrollmentsReducer: { enrollments: any[] } }) => state.enrollmentsReducer);
+  const { courses } = useSelector((state: { coursesReducer: { courses: { _id: string; name: string; number: string; startDate: string; endDate: string; image: string; description: string }[] } }) => state.coursesReducer);
+  const { currentUser } = useSelector((state: { accountReducer: { currentUser: { _id: string; username: string; password: string; firstName: string; lastName: string; email: string; dob: string; role: string } | null } }) => state.accountReducer);
+  const { enrollments } = useSelector((state: { enrollmentsReducer: { enrollments: { _id: string; user: string; course: string }[] } }) => state.enrollmentsReducer);
   const dispatch = useDispatch();
   const [course, setCourse] = useState({
     _id: "0", name: "New Course", number: "New Number",

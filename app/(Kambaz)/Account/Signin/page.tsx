@@ -12,7 +12,7 @@ export default function Signin() {
  const dispatch = useDispatch();
  const signin = () => {
    const user = db.users.find(
-     (u: any) =>
+     (u) =>
        u.username === credentials.username &&
        u.password === credentials.password
    );

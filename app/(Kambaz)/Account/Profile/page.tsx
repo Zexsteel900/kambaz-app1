@@ -3,7 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
 export default function Profile() {
-  const { currentUser } = useSelector((state: { accountReducer: { currentUser: any } }) => state.accountReducer);
+  const { currentUser } = useSelector((state: { accountReducer: { currentUser: { _id: string; username: string; password: string; firstName: string; lastName: string; email: string; dob: string; role: string } | null } }) => state.accountReducer);
 
   return (
     <div id="wd-profile-screen">

@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 export default function Modules() {
   const { cid } = useParams();
   const [moduleName, setModuleName] = useState("");
-  const { modules } = useSelector((state: { modulesReducer: { modules: any[] } }) => state.modulesReducer);
+  const { modules } = useSelector((state: { modulesReducer: { modules: { _id: string; name: string; course: string; lessons?: { _id: string; name: string }[]; editing?: boolean }[] } }) => state.modulesReducer);
   const dispatch = useDispatch();
 
   if (!cid) return <div>No course selected</div>;

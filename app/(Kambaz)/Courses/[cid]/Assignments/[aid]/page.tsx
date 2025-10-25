@@ -10,7 +10,7 @@ export default function EditAssignment() {
   const { cid, aid } = useParams();
   const router = useRouter();
   const dispatch = useDispatch();
-  const { assignments } = useSelector((state: { assignmentsReducer: { assignments: any[] } }) => state.assignmentsReducer);
+  const { assignments } = useSelector((state: { assignmentsReducer: { assignments: { _id: string; title: string; course: string; description: string; points: number; dueDate: string; availableFromDate: string; availableUntilDate: string }[] } }) => state.assignmentsReducer);
   const assignment = assignments.find((a) => a._id === aid);
   const [selected, setSelected] = useState(["Everyone"]);
   const [formData, setFormData] = useState({});
