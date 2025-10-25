@@ -1,3 +1,4 @@
+"use client";
 import { useSelector } from "react-redux";
 export default function HelloRedux() {
   const { message } = useSelector((state: { helloReducer: { message: string } }) => state.helloReducer);

@@ -1,1 +1,1 @@
-export { default as enrollmentsReducer } from "./reducer";
+export { default } from "./reducer";

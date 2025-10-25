@@ -7,7 +7,7 @@ export default function ArrayStateVariable() {
   <div id="wd-array-state-variables">
     <h2>Array State Variable</h2>
       <ListGroup>
-        {todos.map((todo: any) => (
+        {todos.map((todo: { id: string; title: string; completed: boolean }) => (
           <ListGroupItem key={todo.id}>
             {todo.title}
           </ListGroupItem>

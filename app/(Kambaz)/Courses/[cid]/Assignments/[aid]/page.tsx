@@ -13,7 +13,7 @@ export default function EditAssignment() {
   const { assignments } = useSelector((state: { assignmentsReducer: { assignments: { _id: string; title: string; course: string; description: string; points: number; dueDate: string; availableFromDate: string; availableUntilDate: string }[] } }) => state.assignmentsReducer);
   const assignment = assignments.find((a) => a._id === aid);
   const [selected, setSelected] = useState(["Everyone"]);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState<{ title?: string; description?: string; points?: number; course?: string; _id?: string; dueDate?: string; availableFromDate?: string; availableUntilDate?: string }>({});
 
   useEffect(() => {
     if (assignment) {
@@ -124,7 +124,7 @@ export default function EditAssignment() {
         </Form.Group>
         <Form.Group className="mb-3 border p-3">
           <Form.Label htmlFor="wd-available-from">Available from</Form.Label>
-          <Form.Control id="wd-available-from" type="datetime-local" defaultValue={assignment.availableDate} />
+          <Form.Control id="wd-available-from" type="datetime-local" defaultValue={assignment.availableFromDate} />
         </Form.Group>
         <Form.Group className="mb-3 border p-3">
           <Form.Label htmlFor="wd-available-until">Until</Form.Label>

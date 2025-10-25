@@ -19,6 +19,13 @@ export default function Dashboard() {
   });
   const [showEnrolledOnly, setShowEnrolledOnly] = useState(false);
 
+  // Map course IDs to URL parameters
+  const courseUrlMap: Record<string, string> = {
+    "RS101": "1234",
+    "RS102": "5678",
+    "RS103": "91011"
+  };
+
   useEffect(() => {
     const storedEnrollments = localStorage.getItem("enrollments");
     if (storedEnrollments) {
@@ -85,7 +92,7 @@ export default function Dashboard() {
               return (
                 <Col key={course._id} className="wd-dashboard-course" style={{ width: "270px" }}>
                   <Card>
-                    <Link href={`/Courses/${course._id}/Home`} className="wd-dashboard-course-link text-decoration-none text-dark">
+                    <Link href={`/Courses/${courseUrlMap[course._id] || course._id}/Home`} className="wd-dashboard-course-link text-decoration-none text-dark">
                       <CardImg variant="top" src="/images/reactjs.jpg" width="100%" height={160} />
                       <CardBody>
                         <CardTitle className="wd-dashboard-course-title text-nowrap overflow-hidden">{course.name}</CardTitle>

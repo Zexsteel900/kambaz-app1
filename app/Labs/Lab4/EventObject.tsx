@@ -2,9 +2,9 @@ import { useState } from "react";
 export default function EventObject() {
   const [event, setEvent] = useState<React.MouseEvent<HTMLButtonElement> | null>(null);
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    (e.target as HTMLElement).outerHTML;
+    (e.target as HTMLElement).outerHTML; // eslint-disable-line @typescript-eslint/no-unused-expressions
     const eventCopy = { ...e };
-    delete (eventCopy as any).view;
+    delete (eventCopy as { view?: unknown }).view;
     setEvent(eventCopy as React.MouseEvent<HTMLButtonElement>);
   };
   return (
