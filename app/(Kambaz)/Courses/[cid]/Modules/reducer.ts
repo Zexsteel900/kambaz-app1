@@ -11,28 +11,29 @@ const modulesSlice = createSlice({
   initialState,
   reducers: {
     addModule: (state, { payload: module }) => {
-      const newModule: any = {
+      const newModule = {
         _id: uuidv4(),
         lessons: [],
         name: module.name,
         course: module.course,
+        description: "",
       };
-      state.modules = [...state.modules, newModule] as any;
+      state.modules = [...state.modules, newModule];
     },
     deleteModule: (state, { payload: moduleId }) => {
       state.modules = state.modules.filter(
-        (m: any) => m._id !== moduleId
+        (m) => m._id !== moduleId
       );
     },
     updateModule: (state, { payload: module }) => {
-      state.modules = state.modules.map((m: any) =>
+      state.modules = state.modules.map((m) =>
         m._id === module._id ? module : m
-      ) as any;
+      );
     },
     editModule: (state, { payload: moduleId }) => {
-      state.modules = state.modules.map((m: any) =>
+      state.modules = state.modules.map((m) =>
         m._id === moduleId ? { ...m, editing: true } : m
-      ) as any;
+      );
     },
   },
 });

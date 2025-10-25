@@ -8,8 +8,8 @@ import CourseNavigation from "./Navigation";
 
 export default function CoursesLayout({ children }: { children: ReactNode }) {
   const { cid } = useParams() as { cid: string };
-  const { courses } = useSelector((state: any) => state.coursesReducer);
-  const course = courses.find((course: any) => course._id === cid);
+  const { courses } = useSelector((state: { coursesReducer: { courses: any[] } }) => state.coursesReducer);
+  const course = courses.find((course) => course._id === cid);
   const [sidebarVisible, setSidebarVisible] = useState(true);
 
   return (

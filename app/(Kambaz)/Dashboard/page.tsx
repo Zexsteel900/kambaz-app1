@@ -5,31 +5,21 @@ import { Row, Col, Card, CardImg, CardBody, CardTitle, CardText, Button, FormCon
 import { useSelector, useDispatch } from "react-redux";
 import { addNewCourse, deleteCourse, updateCourse } from "../Courses/reducer";
 import { enroll, unenroll } from "../Enrollments/reducer";
-import * as db from "../Database";
+
 
 export default function Dashboard() {
-  const { courses } = useSelector((state: any) => state.coursesReducer);
-  const { currentUser } = useSelector((state: any) => state.accountReducer);
-  const { enrollments } = useSelector((state: any) => state.enrollmentsReducer);
+  const { courses } = useSelector((state: { coursesReducer: { courses: any[] } }) => state.coursesReducer);
+  const { currentUser } = useSelector((state: { accountReducer: { currentUser: any } }) => state.accountReducer);
+  const { enrollments } = useSelector((state: { enrollmentsReducer: { enrollments: any[] } }) => state.enrollmentsReducer);
   const dispatch = useDispatch();
-  const [course, setCourse] = useState<any>({
+  const [course, setCourse] = useState({
     _id: "0", name: "New Course", number: "New Number",
     startDate: "2023-09-10", endDate: "2023-12-15",
     image: "/images/reactjs.jpg", description: "New Description"
   });
   const [showEnrolledOnly, setShowEnrolledOnly] = useState(false);
 
-  const handleAddNewCourse = () => {
-    dispatch(addNewCourse(course));
-  };
 
-  const handleDeleteCourse = (courseId: string) => {
-    dispatch(deleteCourse(courseId));
-  };
-
-  const handleUpdateCourse = () => {
-    dispatch(updateCourse(course));
-  };
 
   return (
     <div id="wd-dashboard">
@@ -68,16 +58,16 @@ export default function Dashboard() {
               if (currentUser.role === "FACULTY") return true;
               if (showEnrolledOnly) {
                 return enrollments.some(
-                  (enrollment: any) =>
+                  (enrollment) =>
                     enrollment.user === currentUser._id &&
                     enrollment.course === course._id
                 );
               }
               return true;
             })
-            .map((course: any) => {
+            .map((course) => {
               const isEnrolled = enrollments.some(
-                (enrollment: any) =>
+                (enrollment) =>
                   enrollment.user === currentUser?._id &&
                   enrollment.course === course._id
               );

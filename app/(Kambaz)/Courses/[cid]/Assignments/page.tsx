@@ -23,10 +23,10 @@ export default function Assignments() {
 
   const mappedCourseId = courseIdMap[cid ?? ""]; // ✅ handles undefined safely
 
-  const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+  const { assignments } = useSelector((state: { assignmentsReducer: { assignments: any[] } }) => state.assignmentsReducer);
 
   const courseAssignments = assignments.filter(
-    (a: any) => a.course === mappedCourseId
+    (a) => a.course === mappedCourseId
   );
 
   if (!courseAssignments.length) {

@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
-import { users, enrollments } from "../../Database";
+import { enrollments } from "../../Database";
 
 export default async function CoursesPage({ params, }: { params: Promise<{ cid: string }>; }) {
  const { cid } = await params;

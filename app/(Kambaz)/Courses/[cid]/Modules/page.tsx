@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 export default function Modules() {
   const { cid } = useParams();
   const [moduleName, setModuleName] = useState("");
-  const { modules } = useSelector((state: any) => state.modulesReducer);
+  const { modules } = useSelector((state: { modulesReducer: { modules: any[] } }) => state.modulesReducer);
   const dispatch = useDispatch();
 
   if (!cid) return <div>No course selected</div>;
@@ -31,8 +31,8 @@ export default function Modules() {
           /><br /><br /><br /><br />
           <ListGroup className="rounded-0" id="wd-modules-list">
             {modules
-              .filter((module: any) => module.course === cid)
-              .map((module: any) => {
+              .filter((module) => module.course === cid)
+              .map((module) => {
               const lessons = module.lessons ?? []; // default to empty array
               return (
                 <ListGroupItem key={module._id} className="wd-module p-0 mb-5 fs-5 border-gray">
@@ -65,7 +65,7 @@ export default function Modules() {
                   </div>
                   <ListGroup className="wd-lessons rounded-0">
                     {lessons.length > 0
-                      ? lessons.map((lesson: any) => (
+                      ? lessons.map((lesson) => (
                           <ListGroupItem key={lesson._id} className="wd-lesson p-3 ps-1">
                             <BsGripVertical className="me-2 fs-3" /> {lesson.name} <LessonControlButtons />
                           </ListGroupItem>

@@ -26,9 +26,9 @@ const enrollmentsSlice = createSlice({
       state.enrollments = [...state.enrollments, newEnrollment];
       localStorage.setItem("enrollments", JSON.stringify(state.enrollments));
     },
-    unenroll: (state, { payload: { userId, courseId } }) => {
+    unenroll: (state, { payload: { userId, courseId } }: { payload: { userId: string; courseId: string } }) => {
       state.enrollments = state.enrollments.filter(
-        (enrollment: any) => !(enrollment.user === userId && enrollment.course === courseId)
+        (enrollment) => !(enrollment.user === userId && enrollment.course === courseId)
       );
       localStorage.setItem("enrollments", JSON.stringify(state.enrollments));
     },

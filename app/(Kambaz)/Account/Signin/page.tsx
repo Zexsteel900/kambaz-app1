@@ -8,7 +8,7 @@ import * as db from "../../Database";
 import { FormControl, Button } from "react-bootstrap";
 
 export default function Signin() {
- const [credentials, setCredentials] = useState<any>({});
+ const [credentials, setCredentials] = useState({ username: "", password: "" });
  const dispatch = useDispatch();
  const signin = () => {
    const user = db.users.find(
