@@ -4,7 +4,7 @@ import { addTodo, updateTodo, setTodo } from "./todosReducer";
 import { Button, FormControl, ListGroupItem } from "react-bootstrap";
 
 export default function TodoForm() {
-  const { todo } = useSelector((state: any) => state.todosReducer);
+  const { todo } = useSelector((state: { todosReducer: { todo: { id: string; title: string } } }) => state.todosReducer);
   const dispatch = useDispatch();
   return (
     <ListGroupItem className="d-flex justify-content-between align-items-center">

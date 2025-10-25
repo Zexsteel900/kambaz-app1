@@ -20,7 +20,7 @@ export default async function CoursesPage({ params, }: { params: Promise<{ cid: 
    redirect(`/Courses/${cid}/Home`);
  }
 
- // Check if student is enrolled
+ // Check if student is enrolled (using static enrollments for now, but should use localStorage in client)
  const isEnrolled = enrollments.some(
    (enrollment) => enrollment.user === currentUser._id && enrollment.course === cid
  );

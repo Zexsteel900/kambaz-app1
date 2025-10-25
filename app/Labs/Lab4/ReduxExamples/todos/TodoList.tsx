@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { ListGroup } from "react-bootstrap";
 
 export default function TodoList() {
-  const { todos } = useSelector((state: any) => state.todosReducer);
+  const { todos } = useSelector((state: { todosReducer: { todos: { id: string; title: string; completed: boolean }[] } }) => state.todosReducer);
   return (
     <div id="wd-todo-list-redux">
       <h2>Todo List</h2>

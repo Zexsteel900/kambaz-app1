@@ -1,10 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Row, Col, Card, CardImg, CardBody, CardTitle, CardText, Button, FormControl } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { addNewCourse, deleteCourse, updateCourse } from "../Courses/reducer";
-import { enroll, unenroll } from "../Enrollments/reducer";
+import { enroll, unenroll, loadEnrollments } from "../Enrollments/reducer";
 
 
 export default function Dashboard() {
@@ -18,6 +18,17 @@ export default function Dashboard() {
     image: "/images/reactjs.jpg", description: "New Description"
   });
   const [showEnrolledOnly, setShowEnrolledOnly] = useState(false);
+
+  useEffect(() => {
+    const storedEnrollments = localStorage.getItem("enrollments");
+    if (storedEnrollments) {
+      dispatch(loadEnrollments(JSON.parse(storedEnrollments)));
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    localStorage.setItem("enrollments", JSON.stringify(enrollments));
+  }, [enrollments]);
 
 
 

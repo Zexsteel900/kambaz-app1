@@ -1,16 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { enrollments } from "../Database";
 
-const getInitialEnrollments = () => {
-  if (typeof window !== "undefined") {
-    const stored = localStorage.getItem("enrollments");
-    return stored ? JSON.parse(stored) : enrollments;
-  }
-  return enrollments;
-};
-
 const initialState = {
-  enrollments: getInitialEnrollments(),
+  enrollments: enrollments,
 };
 
 const enrollmentsSlice = createSlice({
@@ -18,22 +10,19 @@ const enrollmentsSlice = createSlice({
   initialState,
   reducers: {
     enroll: (state, { payload: { userId, courseId } }) => {
-      const newEnrollment = {
-        _id: Date.now().toString(),
-        user: userId,
-        course: courseId,
-      };
+      const newEnrollment = { _id: Date.now().toString(), user: userId, course: courseId };
       state.enrollments = [...state.enrollments, newEnrollment];
-      localStorage.setItem("enrollments", JSON.stringify(state.enrollments));
     },
-    unenroll: (state, { payload: { userId, courseId } }: { payload: { userId: string; courseId: string } }) => {
+    unenroll: (state, { payload: { userId, courseId } }) => {
       state.enrollments = state.enrollments.filter(
         (enrollment) => !(enrollment.user === userId && enrollment.course === courseId)
       );
-      localStorage.setItem("enrollments", JSON.stringify(state.enrollments));
+    },
+    loadEnrollments: (state, { payload: enrollments }) => {
+      state.enrollments = enrollments;
     },
   },
 });
 
-export const { enroll, unenroll } = enrollmentsSlice.actions;
+export const { enroll, unenroll, loadEnrollments } = enrollmentsSlice.actions;
 export default enrollmentsSlice.reducer;
