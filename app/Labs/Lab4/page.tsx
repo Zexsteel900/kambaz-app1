@@ -13,7 +13,6 @@ import PassingFunctions from "./PassingFunctions";
 import ReduxExamples from "./ReduxExamples/page";
 import StringStateVariables from "./StringStateVariables";
 import store from "./store";
-import HelloRedux from "./ReduxExamples/HelloRedux/page";
 
 export default function Lab4() {
   function sayHello() {
